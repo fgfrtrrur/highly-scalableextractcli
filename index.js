@@ -1,11 +1,10 @@
-function findMin(nums) {
-  let left = 0;
-  let right = nums.length - 1;
-  while (left < right) {
-    const mid = Math.floor((left + right) / 2);
-    if (nums[mid] > nums[right]) left = mid + 1;
-    else if (nums[mid] < nums[right]) right = mid;
-    else right--;
+function numSquares(n) {
+  const dp = new Array(n + 1).fill(Infinity);
+  dp[0] = 0;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j * j <= i; j++) {
+      dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+    }
   }
-  return nums[left];
+  return dp[n];
 }
